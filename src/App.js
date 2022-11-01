@@ -1,24 +1,119 @@
-import logo from './logo.svg';
-import './App.css';
+import { Flex, Box } from "@chakra-ui/react";
+import Menu from "./components/Menu";
+import { Routes, Route } from "react-router-dom";
+import Inicio from "./pages/Inicio";
+import RegistroProveedores from "./pages/RegistroProveedores";
+import DetallesProveedores from "./pages/DetallesProveedores";
+import DetallesDocumentos from "./pages/DetallesDocumentos";
+import { useState, useEffect } from "react";
+import EditarProveedores from "./pages/EditarProveedores";
+import EditarDocumentos from "./pages/EditarDocumentos";
+import { AiOutlineMenu } from "react-icons/ai";
+import "../src/style/estilos.css";
+import RegistroDoc from "./pages/RegistroDoc";
+import { supabase } from "./supabaseClient";
 
 function App() {
+  const [editDocumento, setEditDocumento] = useState({
+    numero_factura: 0,
+    fecha: "",
+    proveedor: "",
+    monto: 0,
+    estado: "",
+  });
+
+  const [editProveedores, setEditProveedores] = useState({
+    nombre: "",
+    cedula: "",
+    tipo_persona: "",
+    balance: 0,
+    estado: "",
+  });
+
+  const [isActive, setIsActive] = useState(false);
+
+  const handleClick = (event) => {
+    setIsActive((current) => !current);
+  };
+
+  const [proveedores, setProveedores] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await supabase.from("proveedores").select();
+      setProveedores(data);
+    };
+    getData();
+  }, [proveedores]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Flex>
+      <Box
+        className="icon icon-inactive"
+        onClick={handleClick}
+        bg="black"
+        mr="2rem"
+      >
+        <AiOutlineMenu w={6} h={6} fontSize="1.8rem" color="white" />
+      </Box>
+
+      <Box
+        h="100vh"
+        bg="#34495E"
+        size="200px"
+        color="white"
+        className={isActive ? "sidebar-active" : "sidebar"}
+        pt="15rem"
+      >
+        <Menu />
+      </Box>
+
+      <Box flex="1">
+        <Routes>
+          <Route path="/" element={<Inicio />} />
+          <Route
+            path="/registrar-proveedor"
+            element={<RegistroProveedores />}
+          />
+
+          <Route
+            path="/detalles-producto"
+            element={
+              <DetallesProveedores setEditProveedores={setEditProveedores} />
+            }
+          />
+
+          <Route
+            path="/editar-proveedor"
+            element={<EditarProveedores editProveedores={editProveedores} />}
+          />
+
+          <Route
+            path="/registrar-documento"
+            element={<RegistroDoc proveedores={proveedores} />}
+          />
+          <Route
+            path="/detalles-documento"
+            element={
+              <DetallesDocumentos
+                proveedores={proveedores}
+                setEditDocumento={setEditDocumento}
+              />
+            }
+          />
+
+          <Route
+            path="/editar-documento"
+            element={
+              <EditarDocumentos
+                editDocumento={editDocumento}
+                proveedores={proveedores}
+              />
+            }
+          />
+        </Routes>
+      </Box>
+    </Flex>
   );
 }
 

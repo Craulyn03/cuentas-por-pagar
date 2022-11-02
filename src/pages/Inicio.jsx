@@ -37,7 +37,7 @@ function FadeEx() {
 const Inicio = () => {
   return (
     <Box textAlign="center" pt="3rem">
-      <Heading>SISTEMA DE INVETARIO</Heading>
+      <Heading>CUENTAS POR PAGAR</Heading>
       <Center pt="1rem">
         <Image
           borderRadius="full"
@@ -49,10 +49,9 @@ const Inicio = () => {
       <Box maxWidth="600px" margin="auto" mt="1rem">
         <Center bg="#F2F4F4" p="2rem" borderRadius="2rem">
           <Text textAlign="justify" fontSize="xl">
-            Este sistema de control de inventarios te permite controlar los
-            bienes y el stock, registrar los movimientos y hacer un seguimiento
-            de las compras, manteniendo organizada la cadena de suministro sin
-            ningún contratiempo.
+            En este sistema de cuenta por pagar se podran ver todos los aporte
+            de una parte deudora, que aparece como resultado de una compra de
+            bienes o servicios en términos de crédito, a una parte acreedora.
           </Text>
         </Center>
         <Box mt="2rem">{FadeEx()}</Box>

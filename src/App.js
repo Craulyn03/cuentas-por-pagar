@@ -10,7 +10,6 @@ import DetallesDocumentos from "./pages/DetallesDocumentos";
 import { useState, useEffect } from "react";
 import EditarProveedores from "./pages/EditarProveedores";
 import EditarPagos from "./pages/EditarPagos";
-
 import EditarDocumentos from "./pages/EditarDocumentos";
 import { AiOutlineMenu } from "react-icons/ai";
 import "../src/style/estilos.css";

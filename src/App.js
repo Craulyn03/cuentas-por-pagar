@@ -80,7 +80,7 @@ function App() {
       <Box flex="1">
         <Routes>
           <Route path="/" element={<Inicio />} />
-          <Route path="/registrar-pago" element={<RegistroProveedores />} />
+          <Route path="/registrar-pago" element={<RegistroPago />} />
           <Route
             path="/detalles-pago"
             element={<DetallesPagos setEditPagos={setEditPagos} />}
@@ -88,6 +88,11 @@ function App() {
 
           <Route
             path="/editar-pago"
+            element={<EditarPagos editPagos={editPagos} />}
+          />
+
+          <Route
+            path="/editar-proveedor"
             element={<EditarProveedores editProveedores={editProveedores} />}
           />
 
@@ -99,6 +104,11 @@ function App() {
           />
 
           <Route
+            path="/registrar-proveedor"
+            element={<RegistroProveedores />}
+          />
+
+          <Route
             path="/editar-proveedor"
             element={<EditarPagos editPagos={editPagos} />}
           />
@@ -107,6 +117,7 @@ function App() {
             path="/registrar-documento"
             element={<RegistroDoc proveedores={proveedores} />}
           />
+
           <Route
             path="/detalles-documento"
             element={
@@ -117,7 +128,6 @@ function App() {
             }
           />
 
-          <Route path="/registrar-pago" element={<RegistroPago />} />
           <Route
             path="/editar-documento"
             element={

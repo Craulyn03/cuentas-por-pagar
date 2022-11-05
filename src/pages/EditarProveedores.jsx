@@ -44,7 +44,7 @@ const EditarProveedores = ({ editProveedores }) => {
       <Box bg="#EAEDED" borderRadius="1rem" className="contenedor">
         <Box className="title-container">
           <Heading fontSize="2rem" m="2rem">
-            EDITAR PRODUCTO
+            EDITAR PROVEEDOR
           </Heading>
         </Box>
         <form onSubmit={handleSubmit(onSubmit)} className="form">

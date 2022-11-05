@@ -12,7 +12,7 @@ const EditarPagos = ({ editPagos }) => {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm({ defaultValues: editPagos });
 
   // const { mutate, isLoading } = useMutation(async (data) => {
   //   const { data: result } = await axios.post(

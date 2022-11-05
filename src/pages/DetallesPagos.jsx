@@ -18,7 +18,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 
-const DetallesDocumentos = ({ setEditDocumento }) => {
+const DetallesPagos = ({ setEditPagos }) => {
   const [data, setData] = useState([]);
   const [filtroName, setFiltroName] = useState("");
   const [filtroCategory, setFiltroCategory] = useState("");
@@ -48,8 +48,9 @@ const DetallesDocumentos = ({ setEditDocumento }) => {
   };
 
   const editItem = (el) => {
-    setEditDocumento({
+    setEditPagos({
       id: el.id,
+      monto: el.monto,
       descripcion: el.descripcion,
       estado: el.estado,
     });
@@ -58,7 +59,7 @@ const DetallesDocumentos = ({ setEditDocumento }) => {
   return (
     <Box pt="5rem">
       <Box textAlign="center" mb="2rem">
-        <Heading>LISTADO DE DOCUMENTOS</Heading>
+        <Heading>LISTA DE PAGOS</Heading>
       </Box>
       <Box ml="2rem">
         <Heading ml="1rem" fontSize="1rem">
@@ -82,9 +83,8 @@ const DetallesDocumentos = ({ setEditDocumento }) => {
           <TableCaption>Productos de Inventario</TableCaption>
           <Thead>
             <Tr>
-              <Th>NUMERO DE FACTURA</Th>
-              <Th>FECHA</Th>
-              <Th>PROVEEDOR</Th>
+              <Th>IDENTIFICADOR</Th>
+              <Th>DESCRIPCION</Th>
               <Th>MONTO</Th>
               <Th isNumeric>ESTADO</Th>
             </Tr>
@@ -98,28 +98,27 @@ const DetallesDocumentos = ({ setEditDocumento }) => {
               </Tr>
             ) : (
               data
-                .filter((documento) =>
-                  documento.numero_factura
-                    .toLowerCase()
-                    .includes(filtroName.toLowerCase())
-                )
-                .filter((documento) =>
-                  documento.numero_factura
-                    .toLowerCase()
-                    .includes(filtroCategory.toLowerCase())
-                )
+                // .filter((documento) =>
+                //   documento.numero_factura
+                //     .toLowerCase()
+                //     .includes(filtroName.toLowerCase())
+                // )
+                // .filter((documento) =>
+                //   documento.numero_factura
+                //     .toLowerCase()
+                //     .includes(filtroCategory.toLowerCase())
+                // )
                 .map((el) => (
                   <Tr key={el.id} className="table">
-                    <Td encabezados="NUMERO DE FACTURA">{el.numero_factura}</Td>
-                    <Td encabezados="FECHA">{el.fecha}</Td>
-                    <Td encabezados="PROVEEDOR">{el.proveedor}</Td>
+                    <Td encabezados="IDENTIFICARDOR">{el.id}</Td>
+                    <Td encabezados="DESCRIPCION">{el.descripcion}</Td>
                     <Td encabezados="MONTO">{el.monto}</Td>
                     <Td encabezados="ESTADO" isNumeric>
                       {el.estado}
                     </Td>
 
                     <Td>
-                      <Link to="/editar-documento">
+                      <Link to="/editar-pago">
                         <Button onClick={() => editItem(el)} bg="#F1C40F">
                           Editar
                         </Button>
@@ -128,7 +127,7 @@ const DetallesDocumentos = ({ setEditDocumento }) => {
 
                     <Td>
                       <Button
-                        onClick={() => deleteItem(el.numero_documento)}
+                        onClick={() => deleteItem(el.id)}
                         bg="red"
                         color="white"
                         _hover={{
@@ -148,4 +147,4 @@ const DetallesDocumentos = ({ setEditDocumento }) => {
   );
 };
 
-export default DetallesDocumentos;
+export default DetallesPagos;

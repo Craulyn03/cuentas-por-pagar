@@ -103,16 +103,16 @@ const DetallesDocumentos = ({ setEditDocumento }) => {
               </Tr>
             ) : (
               data
-                .filter((documento) =>
-                  documento.numero_factura
-                    .toLowerCase()
-                    .includes(filtroName.toLowerCase())
-                )
-                .filter((documento) =>
-                  documento.numero_factura
-                    .toLowerCase()
-                    .includes(filtroCategory.toLowerCase())
-                )
+                // .filter((documento) =>
+                //   documento.numero_factura
+                //     .toLowerCase()
+                //     .includes(filtroName.toLowerCase())
+                // )
+                // .filter((documento) =>
+                //   documento.numero_factura
+                //     .toLowerCase()
+                //     .includes(filtroCategory.toLowerCase())
+                // )
                 .map((el) => (
                   <Tr key={el.id} className="table">
                     <Td encabezados="NUMERO DE FACTURA">{el.numero_factura}</Td>

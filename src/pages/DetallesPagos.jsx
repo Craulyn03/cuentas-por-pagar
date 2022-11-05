@@ -35,27 +35,22 @@ const DetallesDocumentos = ({ setEditDocumento }) => {
 
   useEffect(() => {
     const getData = async () => {
-      const { data } = await supabase.from("documentos").select();
+      const { data } = await supabase.from("pagos").select();
       setData(data);
     };
     getData();
   }, [setData]);
 
-  const deleteItem = async (numero_documento) => {
-    setData(data.filter((el) => el.numero_documento !== numero_documento));
-    await supabase
-      .from("documentos")
-      .delete()
-      .match({ numero_documento: numero_documento });
+  const deleteItem = async (id) => {
+    setData(data.filter((el) => el.id !== id));
+    await supabase.from("pagos").delete().match({ id: id });
     // axios.delete(`https://localhost:7051/ProductId?id=${id}`);
   };
 
   const editItem = (el) => {
     setEditDocumento({
-      numero_factura: el.numero_factura,
-      fecha: el.fecha,
-      proveedor: el.proveedor,
-      monto: el.monto,
+      id: el.id,
+      descripcion: el.descripcion,
       estado: el.estado,
     });
   };

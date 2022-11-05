@@ -3,10 +3,14 @@ import Menu from "./components/Menu";
 import { Routes, Route } from "react-router-dom";
 import Inicio from "./pages/Inicio";
 import RegistroProveedores from "./pages/RegistroProveedores";
+import RegistroPago from "./pages/RegistroPago";
 import DetallesProveedores from "./pages/DetallesProveedores";
+import DetallesPagos from "./pages/DetallesPagos";
 import DetallesDocumentos from "./pages/DetallesDocumentos";
 import { useState, useEffect } from "react";
 import EditarProveedores from "./pages/EditarProveedores";
+import EditarPagos from "./pages/EditarPagos";
+
 import EditarDocumentos from "./pages/EditarDocumentos";
 import { AiOutlineMenu } from "react-icons/ai";
 import "../src/style/estilos.css";
@@ -28,6 +32,12 @@ function App() {
     tipo_persona: "",
     balance: 0,
     estado: "",
+  });
+
+  const [editPagos, setEditPagos] = useState({
+    descripcion: "",
+    monto: "",
+    estado: 0,
   });
 
   const [isActive, setIsActive] = useState(false);
@@ -71,9 +81,15 @@ function App() {
       <Box flex="1">
         <Routes>
           <Route path="/" element={<Inicio />} />
+          <Route path="/registrar-pago" element={<RegistroProveedores />} />
           <Route
-            path="/registrar-proveedor"
-            element={<RegistroProveedores />}
+            path="/detalles-pago"
+            element={<DetallesPagos setEditPagos={setEditPagos} />}
+          />
+
+          <Route
+            path="/editar-pago"
+            element={<EditarProveedores editProveedores={editProveedores} />}
           />
 
           <Route
@@ -85,7 +101,7 @@ function App() {
 
           <Route
             path="/editar-proveedor"
-            element={<EditarProveedores editProveedores={editProveedores} />}
+            element={<EditarPagos editPagos={editPagos} />}
           />
 
           <Route
@@ -102,6 +118,7 @@ function App() {
             }
           />
 
+          <Route path="/registrar-pago" element={<RegistroPago />} />
           <Route
             path="/editar-documento"
             element={

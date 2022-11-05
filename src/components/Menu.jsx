@@ -71,6 +71,34 @@ const Menu = () => {
             Detalles de Documentos
           </ListItem>
         </Link>
+
+        <Link to="/registrar-pago">
+          <ListItem
+            p="1.2rem"
+            _hover={{
+              background: "white",
+              color: "teal.500",
+              fontWeight: "600",
+            }}
+          >
+            <ListIcon as={AiFillHdd} />
+            Registrar Pago
+          </ListItem>
+        </Link>
+
+        <Link to="/detalles-pago">
+          <ListItem
+            p="1.2rem"
+            _hover={{
+              background: "white",
+              color: "teal.500",
+              fontWeight: "600",
+            }}
+          >
+            <ListIcon as={AiFillHdd} />
+            Detalles de Pagos
+          </ListItem>
+        </Link>
       </List>
     </Box>
   );

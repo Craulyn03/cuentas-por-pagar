@@ -10,7 +10,6 @@ import {
   Box,
   Button,
   Heading,
-  Input,
 } from "@chakra-ui/react";
 // import axios from "axios";
 // import { useEffect } from "react";
@@ -20,8 +19,7 @@ import { supabase } from "../supabaseClient";
 
 const DetallesDocumentos = ({ setEditDocumento }) => {
   const [data, setData] = useState([]);
-  const [filtroName, setFiltroName] = useState("");
-  const [filtroCategory, setFiltroCategory] = useState("");
+
   //   const [filtroName, setFiltroName] = useState("");
   //   const [filtroCategory, setFiltroCategory] = useState("");
 
@@ -65,23 +63,7 @@ const DetallesDocumentos = ({ setEditDocumento }) => {
       <Box textAlign="center" mb="2rem">
         <Heading>LISTADO DE DOCUMENTOS</Heading>
       </Box>
-      <Box ml="2rem">
-        <Heading ml="1rem" fontSize="1rem">
-          Filtros
-        </Heading>
-        <Input
-          placeholder="Producto"
-          maxWidth="200px"
-          onChange={(e) => setFiltroName(e.target.value)}
-          m="1rem"
-        />
-
-        <Input
-          placeholder="Categoria"
-          maxWidth="200px"
-          onChange={(e) => setFiltroCategory(e.target.value)}
-        />
-      </Box>
+     
       <TableContainer p="2rem">
         <Table variant="simple" className="table">
           <TableCaption>Productos de Inventario</TableCaption>
@@ -90,6 +72,7 @@ const DetallesDocumentos = ({ setEditDocumento }) => {
               <Th>NUMERO DE FACTURA</Th>
               <Th>FECHA</Th>
               <Th>PROVEEDOR</Th>
+              <Th>CONCEPTO DE PAGO</Th>
               <Th>MONTO</Th>
               <Th isNumeric>ESTADO</Th>
             </Tr>
@@ -118,6 +101,7 @@ const DetallesDocumentos = ({ setEditDocumento }) => {
                     <Td encabezados="NUMERO DE FACTURA">{el.numero_factura}</Td>
                     <Td encabezados="FECHA">{el.fecha}</Td>
                     <Td encabezados="PROVEEDOR">{el.proveedor}</Td>
+                    <Td encabezados="CONCEPTO DE PAGO">{el.concepto}</Td>
                     <Td encabezados="MONTO">{el.monto}</Td>
                     <Td encabezados="ESTADO" isNumeric>
                       {el.estado}

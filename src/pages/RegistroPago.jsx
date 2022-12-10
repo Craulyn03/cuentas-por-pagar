@@ -36,28 +36,15 @@ const RegistroPago = ({ proveedores }) => {
       <Box bg="#EAEDED" borderRadius="1rem" className="contenedor">
         <Box className="title-container">
           <Heading fontSize="2rem" textAlign="center" m="2rem">
-            REGISTRO DE PAGOS
+            CONCEPTOS DE PAGOS
           </Heading>
         </Box>
         <form onSubmit={handleSubmit(onSubmit)} className="form">
           <Box className="inputs-container">
             <Input
-              placeholder="Descripcion de pago"
+              placeholder="Concepto de pago"
               {...register("descripcion", { required: true })}
               bg="#fff"
-            />
-
-            {errors.monto?.type === "required" && (
-              <Tag mt="0.2rem" bg="red" color="white">
-                Campo Requerido
-              </Tag>
-            )}
-
-            <Input
-              placeholder="Monto a pagar"
-              {...register("monto", { required: true })}
-              bg="#fff"
-              type="number"
             />
 
             {errors.monto?.type === "required" && (
@@ -71,8 +58,8 @@ const RegistroPago = ({ proveedores }) => {
               {...register("estado", { required: true })}
               bg="#fff"
             >
-              <option value="pendiente">Pendiente</option>
-              <option value="pagado">Pagado</option>
+              <option value="activo">Activo</option>
+              <option value="inactivo">Inactivo</option>
             </Select>
 
             {errors.estado?.type === "required" && (
@@ -89,7 +76,7 @@ const RegistroPago = ({ proveedores }) => {
             // isLoading={isLoading}
             className="btn-enviar"
           >
-            PAGAR
+            AGREGAR CONCEPTO
           </Button>
         </form>
       </Box>

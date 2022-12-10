@@ -82,7 +82,7 @@ const Menu = () => {
             }}
           >
             <ListIcon as={AiFillHdd} />
-            Registrar Pago
+            Registrar Concepto de Pago
           </ListItem>
         </Link>
 
@@ -96,7 +96,22 @@ const Menu = () => {
             }}
           >
             <ListIcon as={AiFillHdd} />
-            Detalles de Pagos
+            Conceptos de Pagos
+          </ListItem>
+        </Link>
+
+
+        <Link to="/transacciones-asientos">
+          <ListItem
+            p="1.2rem"
+            _hover={{
+              background: "white",
+              color: "teal.500",
+              fontWeight: "600",
+            }}
+          >
+            <ListIcon as={AiFillHdd} />
+            Transacciones de asientos
           </ListItem>
         </Link>
       </List>

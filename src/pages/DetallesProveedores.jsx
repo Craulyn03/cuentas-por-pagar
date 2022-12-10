@@ -10,7 +10,6 @@ import {
   Box,
   Button,
   Heading,
-  Input,
 } from "@chakra-ui/react";
 // import axios from "axios";
 // import { useEffect } from "react";
@@ -61,23 +60,7 @@ const DetallesProveedores = ({ setEditProveedores }) => {
       <Box textAlign="center" mb="2rem">
         <Heading>LISTADO DE PROVEEDORES</Heading>
       </Box>
-      <Box ml="2rem">
-        <Heading ml="1rem" fontSize="1rem">
-          Filtros
-        </Heading>
-        <Input
-          placeholder="Producto"
-          maxWidth="200px"
-          // onChange={(e) => setFiltroName(e.target.value)}
-          m="1rem"
-        />
-
-        <Input
-          placeholder="Categoria"
-          maxWidth="200px"
-          // onChange={(e) => setFiltroCategory(e.target.value)}
-        />
-      </Box>
+ 
       <TableContainer p="2rem">
         <Table variant="simple" className="table">
           <TableCaption>Productos de Inventario</TableCaption>

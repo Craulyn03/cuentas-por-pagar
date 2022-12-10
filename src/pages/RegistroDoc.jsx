@@ -6,7 +6,7 @@ import { Input, Button, Box, Heading, Select, Tag } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 
-const RegistroDoc = ({ proveedores }) => {
+const RegistroDoc = ({ proveedores, conceptosPagos, usuarioPagar, initialUserNew} ) => {
   const navigate = useNavigate();
   const {
     register,
@@ -24,8 +24,39 @@ const RegistroDoc = ({ proveedores }) => {
 
   const onSubmit = async (data, e) => {
     // mutate(data);
-    await supabase.from("documentos").insert([data]);
-    console.log(data);
+
+    const provedor =  await supabase.from("proveedores").select(); 
+    const proveedor = provedor.data
+    const balanceData = data.monto
+
+    parseInt(balanceData)
+   
+    proveedores.forEach(i =>{
+      if (i.nombre === data.proveedor){
+        usuarioPagar = i
+        initialUserNew = i
+      }
+
+
+    })
+   proveedor.forEach(nombre =>{
+      if (nombre.nombre === data.proveedor){
+        const pago = nombre.balance - balanceData
+        initialUserNew.balance = pago
+    
+
+        console.log(usuarioPagar)
+        console.log(initialUserNew)
+       
+      }
+    })
+
+    console.log(usuarioPagar)
+    console.log(initialUserNew)
+
+    await supabase.from("proveedores").update(usuarioPagar.balance).match(initialUserNew.balance);
+    await supabase.from("documentos").insert([data]);  
+
     Swal.fire("Buen Trabajo!", "PRODUCTO AGREGADO CORRECTAMENTE!", "success");
     e.target.reset();
     navigate("/");
@@ -84,8 +115,21 @@ const RegistroDoc = ({ proveedores }) => {
               bg="#fff"
             >
               {proveedores.map((el) => (
-                <option value={el.id} key={el.id}>
+                <option value={el.nombre} key={el.id}>
                   {el.nombre}
+                </option>
+              ))}
+            </Select>
+
+
+            <Select
+              placeholder="Concepto de pago"
+              {...register("concepto", { required: true })}
+              bg="#fff"
+            >
+              {conceptosPagos.map((el) => (
+                <option value={el.descripcion} key={el.id}>
+                  {el.descripcion}
                 </option>
               ))}
             </Select>

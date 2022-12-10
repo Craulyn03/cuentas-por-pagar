@@ -10,7 +10,6 @@ import {
   Box,
   Button,
   Heading,
-  Input,
 } from "@chakra-ui/react";
 // import axios from "axios";
 // import { useEffect } from "react";
@@ -20,8 +19,7 @@ import { supabase } from "../supabaseClient";
 
 const DetallesPagos = ({ setEditPagos }) => {
   const [data, setData] = useState([]);
-  const [filtroName, setFiltroName] = useState("");
-  const [filtroCategory, setFiltroCategory] = useState("");
+
   //   const [filtroName, setFiltroName] = useState("");
   //   const [filtroCategory, setFiltroCategory] = useState("");
 
@@ -61,31 +59,14 @@ const DetallesPagos = ({ setEditPagos }) => {
       <Box textAlign="center" mb="2rem">
         <Heading>LISTA DE PAGOS</Heading>
       </Box>
-      <Box ml="2rem">
-        <Heading ml="1rem" fontSize="1rem">
-          Filtros
-        </Heading>
-        <Input
-          placeholder="Producto"
-          maxWidth="200px"
-          onChange={(e) => setFiltroName(e.target.value)}
-          m="1rem"
-        />
 
-        <Input
-          placeholder="Categoria"
-          maxWidth="200px"
-          onChange={(e) => setFiltroCategory(e.target.value)}
-        />
-      </Box>
       <TableContainer p="2rem">
         <Table variant="simple" className="table">
           <TableCaption>Productos de Inventario</TableCaption>
           <Thead>
             <Tr>
               <Th>IDENTIFICADOR</Th>
-              <Th>DESCRIPCION</Th>
-              <Th>MONTO</Th>
+              <Th>CONCEPTO DE PAGO</Th>
               <Th isNumeric>ESTADO</Th>
             </Tr>
           </Thead>
@@ -112,7 +93,6 @@ const DetallesPagos = ({ setEditPagos }) => {
                   <Tr key={el.id} className="table">
                     <Td encabezados="IDENTIFICARDOR">{el.id}</Td>
                     <Td encabezados="DESCRIPCION">{el.descripcion}</Td>
-                    <Td encabezados="MONTO">{el.monto}</Td>
                     <Td encabezados="ESTADO" isNumeric>
                       {el.estado}
                     </Td>

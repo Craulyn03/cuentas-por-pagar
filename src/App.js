@@ -15,8 +15,31 @@ import { AiOutlineMenu } from "react-icons/ai";
 import "../src/style/estilos.css";
 import RegistroDoc from "./pages/RegistroDoc";
 import { supabase } from "./supabaseClient";
+import TransaccionAsiento from "./pages/TransaccionAsiento";
+
+
+const initialUser = {
+  id: null,
+  nombre: "",
+  tipo_persona: "",
+  cedula:"",
+  estado: "",
+  balance: 0,
+};
+
+const initialPago = {
+  id: null,
+  nombre: "",
+  cedula:"",
+  tipo_persona: "",
+  estado: "",
+  balance: 0,
+};
+
 
 function App() {
+
+
   const [editDocumento, setEditDocumento] = useState({
     numero_factura: 0,
     fecha: "",
@@ -46,6 +69,10 @@ function App() {
   };
 
   const [proveedores, setProveedores] = useState([]);
+  const [conceptosPagos, setConceptosPagos] = useState([]);
+    const [initialUserNew, setInitialUserNew] = useState(initialUser);
+  const [usuarioPagar, setUsuarioPagar] = useState(initialPago);
+
 
   useEffect(() => {
     const getData = async () => {
@@ -54,6 +81,15 @@ function App() {
     };
     getData();
   }, [proveedores]);
+
+  useEffect(() => {
+    const getConceptosPagos = async () => {
+      const { data } = await supabase.from("pagos").select();
+      setConceptosPagos(data);
+    };
+    getConceptosPagos();
+  }, [conceptosPagos]);
+
 
   return (
     <Flex>
@@ -115,7 +151,7 @@ function App() {
 
           <Route
             path="/registrar-documento"
-            element={<RegistroDoc proveedores={proveedores} />}
+            element={<RegistroDoc proveedores={proveedores} conceptosPagos={conceptosPagos} initialUserNew={initialUserNew} usuarioPagar={usuarioPagar}/>}
           />
 
           <Route
@@ -137,6 +173,12 @@ function App() {
               />
             }
           />
+
+          <Route
+            path="/transacciones-asientos"
+            element={<TransaccionAsiento/>}
+          />
+
         </Routes>
       </Box>
     </Flex>
